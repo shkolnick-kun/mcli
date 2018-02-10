@@ -13,12 +13,17 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../src" />
 				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../src/mcli.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/mcli.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

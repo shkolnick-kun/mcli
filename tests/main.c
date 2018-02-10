@@ -42,8 +42,16 @@ int main()
     {
         int i;
         i = MCLI_STRTOK(&s, d0, sizeof(f) - (s - f));
+        if (i < 0)
+        {
+            printf("Error!");
+            break;
+        }
         s[i] = 0;
-        printf("The token is: %s, %d\n", s, i);
+        if (i)
+        {
+            printf("The token is: %s, %d\n", s, i);
+        }
         s += i + 1;
     }
 
@@ -52,8 +60,16 @@ int main()
     {
         int i;
         i = MCLI_STRTOK(&s, d1, sizeof(f) - (s - f));
+        if (i < 0)
+        {
+            printf("Error!");
+            break;
+        }
         s[i] = 0;
-        printf("The token is: %s, %d\n", s, i);
+        if (i)
+        {
+            printf("The token is: %s, %d\n", s, i);
+        }
         s += i + 1;
     }
 
@@ -61,7 +77,16 @@ int main()
     printf("STRTOK(%s, d1, 0) = %d\n", d, MCLI_STRTOK(&s, d1, sizeof(d)));
 
     s = e;
-    printf("STRTOK(%s, d1, 0) = %d\n", e, MCLI_STRTOK(&s, d1, sizeof(e)));
+    printf("STRTOK(%s, d1, 0) = %d\n", e, MCLI_STRTOK(&s, d1, 0));
+
+    s = e;
+    printf("STRTOK(%s, d1, *) = %d\n", e, MCLI_STRTOK(&s, d1, sizeof(e)));
+
+    s = f;
+    printf("STRTOK(%s, d1, 1) = %d\n", f, MCLI_STRTOK(&s, d1, 2));
+
+    s = f;
+    printf("STRTOK(%s, d1, 4) = %d\n", f, MCLI_STRTOK(&s, d1, 4));
 
     printf("The End!");
     return 0;

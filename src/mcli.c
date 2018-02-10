@@ -64,16 +64,18 @@ int mcli_strtok(char ** pts, const char * d, int slim, int dlen)
 {
     char *s;
     int   n;
+
+    if (0 == slim)
+    {
+        /*Error*/
+        return MCLI_ST_EOOBA;
+    }
     /*Skip delimiters*/
     for(s = *pts; _mcli_is_in(*s, d, dlen); s++)
     {
-        if (0 == *s)
-        {
-            /*EOL detected*/
-            break;
-        }
         if (0 == --slim)
         {
+            /*Error*/
             return MCLI_ST_EOOBA;
         }
     }
