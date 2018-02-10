@@ -64,10 +64,8 @@ int mcli_strtok(char ** pts, const char * d, int slim, int dlen)
 {
     char *s;
     int   n;
-    /*Starting position*/
-    s = *pts;
     /*Skip delimiters*/
-    while (_mcli_is_in(*s, d, dlen))
+    for(s = *pts; _mcli_is_in(*s, d, dlen); s++)
     {
         if (0 == *s)
         {
@@ -78,14 +76,13 @@ int mcli_strtok(char ** pts, const char * d, int slim, int dlen)
         {
             return MCLI_ST_EOOBA;
         }
-        s++;
     }
     /*This is token starting position! Which is "returned" to caller*/
     *pts = s;
     /*Count chars in the token!*/
-    for (n = 0; _mcli_is_in(*s, d, dlen) == 0; n++)
+    for (n = 0; _mcli_is_in(*s, d, dlen) == 0; s++, n++)
     {
-        if (0 == *s++)
+        if (0 == *s)
         {
             /*EOL detected*/
             break;
