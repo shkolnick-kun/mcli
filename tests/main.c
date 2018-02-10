@@ -9,6 +9,16 @@ char c[] = "earth";
 char d[] = "\0";
 char e[] = "ololo";
 
+const char d0[] = "";
+const char d1[] = " ,_,\"";
+
+char f[] = "   Mars is_not_a \"star\"";
+
+void test_strtok(const char d)
+{
+
+}
+
 int main()
 {
     /*stren*/
@@ -26,7 +36,33 @@ int main()
     printf("CMP(%s, %s) = %d\n", e, c, mcli_strcmp(a, e, sizeof(e)));
 
     /*strtok*/
+    char * s;
+    s = f;
+    while (s - f < sizeof(f))
+    {
+        int i;
+        i = MCLI_STRTOK(&s, d0, sizeof(f) - (s - f));
+        s[i] = 0;
+        printf("The token is: %s, %d\n", s, i);
+        s += i + 1;
+    }
 
-    printf("Hello world!\n");
+    s = f;
+    while (s - f < sizeof(f))
+    {
+        int i;
+        i = MCLI_STRTOK(&s, d1, sizeof(f) - (s - f));
+        s[i] = 0;
+        printf("The token is: %s, %d\n", s, i);
+        s += i + 1;
+    }
+
+    s = d;
+    printf("STRTOK(%s, d1, 0) = %d\n", d, MCLI_STRTOK(&s, d1, sizeof(d)));
+
+    s = e;
+    printf("STRTOK(%s, d1, 0) = %d\n", e, MCLI_STRTOK(&s, d1, sizeof(e)));
+
+    printf("The End!");
     return 0;
 }
