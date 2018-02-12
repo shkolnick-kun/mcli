@@ -150,6 +150,7 @@ int mcli_shell_parse(mcli_shell_st * shell, char * buf, int lim)
 
     int len;
     int argc;
+    int cmd_len;
     int i;
     char is_str;
     /*Check args*/
@@ -166,8 +167,8 @@ int mcli_shell_parse(mcli_shell_st * shell, char * buf, int lim)
     /*Tokenize the command line*/
     len++;
     t_start = buf;
-
     argc    = 0;
+    cmd_len = 0;
     is_str  = 0;
     while (t_start - buf < len)
     {
@@ -183,6 +184,11 @@ int mcli_shell_parse(mcli_shell_st * shell, char * buf, int lim)
         {
             int j;
             /*Found something!*/
+            if (0 == cmd_len)
+            {
+                /*argv[0] is command name*/
+                cmd_len = i;
+            }
             /*Is it a new option?*/
             if (!is_str)
             {
@@ -217,7 +223,7 @@ int mcli_shell_parse(mcli_shell_st * shell, char * buf, int lim)
         mcli_cmd_st * cmd;
 
         cmd = shell->cmd + i;
-        if (0 == mcli_strcmp(cmd->name, shell->argv[0], shell->argv[1] - shell->argv[0]))
+        if (0 == mcli_strcmp(cmd->name, shell->argv[0], cmd_len))
         {
             /*Found the command now try to execute it*/
             if (cmd->cmain)

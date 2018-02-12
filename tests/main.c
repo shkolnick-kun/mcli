@@ -20,7 +20,7 @@ char tst_cmd_str3[] = "cmd1 ololo ololo";
 char tst_cmd_str4[] = "cmd0 a \"b c\" d \"e f\" gg";
 char tst_cmd_str5[] = "cmd0 a \"b\"\"c\" d \"e f\" gg";
 char tst_cmd_str6[] = "cmd0 a b \"c";
-
+char tst_cmd_str7[] = "cmd1";
 
 int tst_cmd_main(int argc, char ** argv)
 {
@@ -123,6 +123,8 @@ int main()
     s = f;
     printf("STRTOK(%s, d1, 4) = %d\n", f, MCLI_STRTOK(&s, d1, 4));
 
+
+    printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, c, sizeof(c)));
     printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, d, 1));
     printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, d, 0));
     printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, tst_cmd_str1, 0));
@@ -132,6 +134,7 @@ int main()
     printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, tst_cmd_str4, sizeof(tst_cmd_str4)));
     printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, tst_cmd_str5, sizeof(tst_cmd_str5)));
     printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, tst_cmd_str6, sizeof(tst_cmd_str6)));
+    printf("\nResult is: %d\n", mcli_shell_parse(&tst_shell, tst_cmd_str7, sizeof(tst_cmd_str7)));
 
 
     printf("The End!\n");
